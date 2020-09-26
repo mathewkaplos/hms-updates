@@ -1,0 +1,27 @@
+private void issueFromDB()
+	{
+
+		for (Integer id : set)
+		{
+			String sql = "select adempiere.issue(" + id + " ,'" + issued_by + "')";
+			DB.getSQLValue(null, sql);
+
+		}
+		String sql = "select adempiere.update_treatment_doc(" + m_treatID + ")";
+		DB.getSQLValue(null, sql);
+
+		if (set.size() > 0)
+		{
+			JOptionPane.showMessageDialog(null, "Issued", "Information", JOptionPane.INFORMATION_MESSAGE);
+		}
+
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Please select what to issue!", "Information",
+					JOptionPane.INFORMATION_MESSAGE);
+		}
+		// clear the set
+		set.removeAll(set);
+		initData();
+		dispense.refresh();
+	}
